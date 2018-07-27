@@ -10,30 +10,37 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RestController
-@Controller
+//@Controller
+@RestController
 public class StudentsController {
 
-    @RequestMapping(value="/student", method= RequestMethod.GET)
-    public String studentForm(Model model) {
-        model.addAttribute("student", new Student());
-        return "student";
-    }
+//    @RequestMapping(value="/student", method= RequestMethod.GET)
+//    public String studentForm(Model model) {
+//        model.addAttribute("student", new Student());
+//        return "student";
+//    }
+//
+//    @RequestMapping(value="/student", method=RequestMethod.POST)
+//    public String greetingSubmit(@ModelAttribute Student student, Model model) {
+//        model.addAttribute("student", student);
+//        return "result";
+//    }
 
-    @RequestMapping(value="/student", method=RequestMethod.POST)
-    public String greetingSubmit(@ModelAttribute Student student, Model model) {
-        model.addAttribute("student", student);
-        return "result";
-    }
-
-//    @Autowired
-//    private StudentService studentService;
+    @Autowired
+    private StudentService studentService;
 //
 //    @Autowired
 //    private UserService userService;
 
-//    @GetMapping
-//    public List<Student> students() {
-//        return studentService.getAllStudents();
-//    }
+    @PostMapping
+    public String student(@RequestBody Student student) {
+        studentService.insert(student);
+
+        return "student created";
+    }
+
+    @GetMapping
+    public List<Student> students() {
+        return studentService.getAllStudents();
+    }
 }
