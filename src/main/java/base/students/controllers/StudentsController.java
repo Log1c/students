@@ -2,18 +2,20 @@ package base.students.controllers;
 
 import base.students.entities.Student;
 import base.students.service.StudentService;
-import base.students.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-//@Controller
-@RestController
+@Controller
+//@RestController
 public class StudentsController {
-
+    private String sortDateMethod = "ASC";
 //    @RequestMapping(value="/student", method= RequestMethod.GET)
 //    public String studentForm(Model model) {
 //        model.addAttribute("student", new Student());
@@ -33,14 +35,32 @@ public class StudentsController {
 //    private UserService userService;
 
     @PostMapping
-    public String student(@RequestBody Student student) {
+    public @ResponseBody String student(@RequestBody Student student) {
         studentService.insert(student);
 
         return "student created";
     }
 
+//    @GetMapping
+//    public @ResponseBody List<Student> students() {
+//        return studentService.getAllStudents();
+//    }
+
     @GetMapping
-    public List<Student> students() {
-        return studentService.getAllStudents();
+    public String students(Model model) {
+        List<Student> students = filterAndSort();
+        model.addAttribute("students", students);
+        return "students";
+    }
+
+    private List<Student> filterAndSort() {
+        //TODO fix it
+        switch (sortDateMethod) {
+            case "ASC":
+                return studentService.getAllStudents();
+            case "DESC":
+                return studentService.getAllStudents();
+        }
+        return null;
     }
 }
