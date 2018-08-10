@@ -17,6 +17,10 @@ public class StudentService {
         return studentsRepository.findAll();
     }
 
+    public List<Student> findByName(String firstName) {
+        return studentsRepository.find(firstName);
+    }
+
     public void insert(Student student) {
         studentsRepository.save(student);
     }

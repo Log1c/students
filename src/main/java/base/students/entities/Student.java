@@ -12,17 +12,18 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String firstName;
-    private String lastName;
-    private Date dateOfBirth;
+    private String firstName = "";
+    private String lastName = "";
+    private Date birthday = new Date();
+    private boolean inactive = false;
 
     public Student() {
     }
 
-    public Student(String firstName, String lastName, Date dateOfBirth) {
+    public Student(String firstName, String lastName, Date birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
+        this.birthday = birthday;
     }
 
     public Long getId() {
@@ -49,11 +50,19 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public boolean isInactive() {
+        return inactive;
+    }
+
+    public void setInactive(boolean inactive) {
+        this.inactive = inactive;
     }
 }
