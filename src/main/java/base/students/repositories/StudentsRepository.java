@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface StudentsRepository extends JpaRepository<Student, Long> {
-    @Query("SELECT s FROM Student WHERE LOWER(firstName) = LOWER(:firstName)")
+    @Query("SELECT s FROM Student s WHERE LOWER(s.firstName) = LOWER(:firstName)")
     public List<Student> find(@Param("firstName") String firstName);
 }

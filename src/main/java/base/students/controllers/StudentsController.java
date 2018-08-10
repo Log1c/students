@@ -32,17 +32,17 @@ public class StudentsController {
 //    @Autowired
 //    private UserService userService;
 
-    @PostMapping
+    @PostMapping("/api/student")
     public @ResponseBody String student(@RequestBody Student student) {
         studentService.insert(student);
 
         return "student created";
     }
 
-//    @GetMapping
-//    public @ResponseBody List<Student> students() {
-//        return studentService.getAllStudents();
-//    }
+    @GetMapping("/api/students")
+    public @ResponseBody List<Student> students() {
+        return studentService.getAllStudents();
+    }
 
     @GetMapping
     public String students(Model model) {
@@ -62,9 +62,8 @@ public class StudentsController {
         return null;
     }
 
-    @GetMapping("/users/getByName")
+    @GetMapping("api/students/getByName")
     public @ResponseBody List<Student> findByName(@PathVariable String firstName) {
         return studentService.findByName(firstName);
-
     }
 }
